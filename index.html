@@ -496,6 +496,9 @@
             display: flex; align-items: center; justify-content: space-between;
             gap: 16px; flex-wrap: wrap;
         }
+        .footer-left {
+            display: flex; flex-direction: column; gap: 8px;
+        }
         .footer-copy { font-size: .78rem; color: var(--muted); }
         .footer-nav { display: flex; gap: 20px; }
         .footer-nav a { font-size: .78rem; color: var(--muted); transition: color .18s; }
@@ -1065,15 +1068,17 @@
 <!-- FOOTER -->
 <div class="footer-wrap">
     <footer class="site-footer">
-        <a href="#" class="nav-logo">
-            <img
-                src="https://cigore.github.io/portofolio/mylogo.png"
-                alt="Eko Maidiansyah"
-                class="footer-logo-img"
-                onerror="this.style.display='none'"
-            >
-        </a>
-        <span class="footer-copy">© 2025 Eko Maidiansyah. All rights reserved.</span>
+        <div class="footer-left">
+            <a href="#" class="nav-logo">
+                <img
+                    src="https://cigore.github.io/portofolio/mylogo.png"
+                    alt="Eko Maidiansyah"
+                    class="footer-logo-img"
+                    onerror="this.style.display='none'"
+                >
+            </a>
+            <span class="footer-copy">© <span id="footerYear"></span> Eko Maidiansyah. All rights reserved.</span>
+        </div>
         <nav class="footer-nav">
             <a href="#about">Tentang</a>
             <a href="#projects">Proyek</a>
@@ -1088,6 +1093,9 @@
 </a>
 
 <script>
+    /* ── AUTO YEAR ─────────────────────────────────────── */
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
     /* ── DARK MODE ─────────────────────────────────────── */
     const html = document.documentElement;
 
