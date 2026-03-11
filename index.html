@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<meta name="description" content="Eko Maidiansyah — Full-Stack Developer & Vibe Coder berbasis Jakarta."/>
+<meta name="description" content="Eko Maidiansyah — Full-Stack Developer berbasis Jakarta yang berfokus pada pengembangan produk digital yang efisien, fungsional, dan siap berkembang."/>
 <title>Eko Maidiansyah - Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -238,11 +238,12 @@ section{padding:96px 0}
 
 .hero-title{margin-bottom:20px}
 .hero-title em{font-style:italic;color:var(--accent)}
+.hero-title br{display:block}
 
 .hero-desc{
   font-size:1.02rem;line-height:1.82;
   color:var(--text-2);
-  max-width:430px;margin-bottom:32px;
+  max-width:560px;margin-bottom:32px;
 }
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
 .hero-divider{
@@ -352,7 +353,6 @@ section{padding:96px 0}
   background:rgba(0,0,0,.3);
   border-color:rgba(255,255,255,.1);
 }
-.pnt-left{}
 .pnt-name{
   font-size:.82rem;font-weight:700;
   color:#fff;line-height:1.2;
@@ -774,11 +774,25 @@ section{padding:96px 0}
   .stack-dot{width:18px;height:18px}
   .hero-badge{font-size:.68rem;margin-bottom:16px}
   .display{font-size:clamp(2rem,9vw,2.9rem)}
+  .hero-title br{display:none}
+  .hero-title{line-height:1.15}
   .hero-desc{font-size:.93rem;max-width:100%;margin-bottom:22px}
   .hero-actions{gap:9px;margin-bottom:28px}
+  .hero-actions .btn{width:100%;justify-content:center}
   .btn{padding:10px 17px;font-size:.82rem}
-  .hero-stats{gap:18px}
+  .hero-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+  }
   .stat-num{font-size:1.55rem}
+  .stat-label{
+    font-size:.7rem;
+    line-height:1.4;
+  }
+  .photo-name-tag{padding:9px 12px}
+  .pnt-name{font-size:.78rem}
+  .pnt-role{font-size:.62rem}
 
   .about-grid{gap:30px}
   .service-grid{grid-template-columns:1fr 1fr;gap:8px}
@@ -824,7 +838,7 @@ section{padding:96px 0}
       <li><a href="#projects">Proyek</a></li>
       <li><a href="#experience">Pengalaman</a></li>
       <li><a href="#skills">Keahlian</a></li>
-      <li><a href="#blog">Blog</a></li>
+      <li><a href="#blog">Artikel</a></li>
       <li><a href="#contact">Kontak</a></li>
     </ul>
     <div class="nav-right">
@@ -838,22 +852,20 @@ section{padding:96px 0}
   </div>
 </nav>
 
-<!-- MOBILE BOTTOM NAV — modern icons -->
+<!-- MOBILE BOTTOM NAV -->
 <nav class="bottom-nav" id="bottomNav" role="navigation" aria-label="Navigasi bawah">
   <div class="bnav-inner">
 
-    <!-- Home: house with chimney, modern stroke -->
-    <a href="#hero" class="bn-item active" data-section="hero" aria-label="Home">
+    <a href="#hero" class="bn-item active" data-section="hero" aria-label="Beranda">
       <div class="bn-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 10.5V19a1 1 0 001 1h4.5v-4.5h5V20H19a1 1 0 001-1v-8.5"/>
           <path d="M2 12L12 3l10 9"/>
         </svg>
       </div>
-      <span class="bn-label">Home</span>
+      <span class="bn-label">Beranda</span>
     </a>
 
-    <!-- About: user with subtle circle -->
     <a href="#about" class="bn-item" data-section="about" aria-label="Tentang">
       <div class="bn-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -864,7 +876,6 @@ section{padding:96px 0}
       <span class="bn-label">Tentang</span>
     </a>
 
-    <!-- Projects: grid/squares layout -->
     <a href="#projects" class="bn-item" data-section="projects" aria-label="Proyek">
       <div class="bn-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -877,17 +888,15 @@ section{padding:96px 0}
       <span class="bn-label">Proyek</span>
     </a>
 
-    <!-- Skills: lightning bolt -->
     <a href="#skills" class="bn-item" data-section="skills" aria-label="Keahlian">
       <div class="bn-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
           <path d="M13 2L4.5 13H12L11 22L19.5 11H12L13 2Z"/>
         </svg>
       </div>
-      <span class="bn-label">Skill</span>
+      <span class="bn-label">Keahlian</span>
     </a>
 
-    <!-- Contact: paper plane send -->
     <a href="#contact" class="bn-item" data-section="contact" aria-label="Kontak">
       <div class="bn-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -908,18 +917,18 @@ section{padding:96px 0}
       <div>
         <div class="hero-badge r">
           <span class="badge-dot" aria-hidden="true"></span>
-          Terbuka untuk proyek baru
+          Siap berkolaborasi untuk proyek baru
         </div>
         <h1 class="display hero-title r d1">
-          Full-Stack<br><em>Developer</em><br>&amp; Vibe Coder.
+          Full-Stack<br><em>Developer</em><br>&amp; Product Builder
         </h1>
         <p class="hero-desc r d2">
-          Hei, saya Eko — suka bangun hal-hal yang beneran berguna. Dari desain sampai deploy, saya yang jaga semuanya tetap jalan dengan mulus. Kalau kamu punya ide yang stuck di kepala, mari kita wujudkan bareng.
+          Saya Eko Maidiansyah, seorang Full-Stack Developer yang berfokus pada pengembangan produk digital yang fungsional, efisien, dan relevan dengan kebutuhan bisnis. Saya terbiasa menangani proses pengembangan dari tahap perencanaan hingga implementasi, dengan pendekatan yang rapi, adaptif, dan berorientasi pada hasil.
         </p>
         <div class="hero-actions r d3">
           <a href="#contact" class="btn btn-primary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-            Hubungi Saya
+            Diskusikan Proyek
           </a>
           <a href="https://cigore.github.io/portofolio/INGREDIENTS.pdf" class="btn btn-outline" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -934,21 +943,17 @@ section{padding:96px 0}
         </div>
       </div>
 
-      <!-- PHOTO FRAME — Modern floating card -->
       <div class="hero-photo-wrap r d2">
         <div class="photo-frame-outer">
-          <!-- Back decorative cards -->
           <div class="photo-bg-card2"></div>
           <div class="photo-bg-card"></div>
 
-          <!-- Main photo card -->
           <div class="photo-card">
             <img src="https://cigore.github.io/portofolio/fotoku.png" alt="Eko Maidiansyah"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
             <div class="photo-placeholder" style="display:none" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
-            <!-- Name tag overlay -->
             <div class="photo-name-tag">
               <div class="pnt-left">
                 <div class="pnt-name">Eko Maidiansyah</div>
@@ -958,10 +963,9 @@ section{padding:96px 0}
             </div>
           </div>
 
-          <!-- Floating badges -->
           <div class="photo-badge-exp">
             <div class="pbe-num">5+</div>
-            <div class="pbe-label">Years</div>
+            <div class="pbe-label">Tahun</div>
           </div>
 
           <div class="photo-badge-stack">
@@ -970,7 +974,7 @@ section{padding:96px 0}
               <div class="stack-dot sd2" title="Node.js">N</div>
               <div class="stack-dot sd3" title="TypeScript">T</div>
             </div>
-            <span class="stack-label">Tech Stack</span>
+            <span class="stack-label">Teknologi Utama</span>
           </div>
         </div>
       </div>
@@ -986,12 +990,18 @@ section{padding:96px 0}
       <div>
         <p class="label r">Tentang Saya</p>
         <h2 class="section-title r d1" style="margin:12px 0 20px">
-          Kode yang baik bukan sekadar jalan —<br>ia harus
-          <em style="font-family:'DM Serif Display',serif;color:var(--accent)">bertahan</em>.
+          Saya membangun solusi digital yang tidak hanya berjalan dengan baik, tetapi juga
+          <em style="font-family:'DM Serif Display',serif;color:var(--accent)">siap berkembang</em>.
         </h2>
-        <p class="about-text r d2">Sudah lima tahun lebih saya ngulik dunia web, dari halaman landing sederhana sampai platform e-commerce yang dipakai ribuan orang. Yang paling saya suka? Momen ketika sesuatu yang tadinya cuma sketsa di kertas akhirnya bisa diklik dan dipakai beneran.</p>
-        <p class="about-text r d2">Latar belakang Computer Science bikin saya paham "kenapa"-nya, tapi pengalaman di berbagai startup yang ngajarin saya "bagaimana"-nya. Saya tahu kapan harus gerak cepat dan kapan harus duduk dulu, mikir, terus refactor dengan benar.</p>
-        <p class="about-text r d2">Kalau lagi nggak coding, biasanya saya lagi baca tentang teknologi baru, sesekali kontribusi ke open-source, atau nulis catatan dari hal-hal yang saya pelajari langsung di lapangan — biar nggak lupa, dan siapa tahu berguna buat orang lain.</p>
+        <p class="about-text r d2">
+          Saya memiliki pengalaman lebih dari lima tahun dalam pengembangan web, mulai dari landing page, dashboard internal, hingga platform digital yang digunakan dalam skala lebih luas. Bagi saya, teknologi bukan hanya soal membangun sesuatu yang berjalan, tetapi juga menciptakan solusi yang benar-benar memberi nilai.
+        </p>
+        <p class="about-text r d2">
+          Dengan latar belakang di bidang Computer Science dan pengalaman di berbagai lingkungan kerja yang dinamis, saya terbiasa mengambil keputusan teknis secara terukur. Saya memahami kapan sebuah produk perlu bergerak cepat, dan kapan kualitas struktur, performa, serta maintainability harus menjadi prioritas.
+        </p>
+        <p class="about-text r d2">
+          Di luar pekerjaan utama, saya senang mengeksplorasi teknologi baru, mendokumentasikan hal-hal yang saya pelajari, dan terus memperbarui pendekatan kerja agar tetap relevan dengan perkembangan industri.
+        </p>
         <div class="chip-row r d3">
           <span class="chip">React</span><span class="chip">Node.js</span><span class="chip">Python</span>
           <span class="chip">TypeScript</span><span class="chip">Docker</span><span class="chip">AWS</span>
@@ -1001,27 +1011,27 @@ section{padding:96px 0}
       <div class="service-grid r d2">
         <div class="service-card">
           <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-          <h4>Frontend</h4><p>React, Vue, Angular — tampilan yang enak dilihat dan tetap ngebut di semua perangkat.</p>
+          <h4>Frontend</h4><p>Membangun antarmuka yang responsif, nyaman digunakan, dan konsisten di berbagai ukuran layar serta perangkat.</p>
         </div>
         <div class="service-card">
           <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
-          <h4>Backend</h4><p>Node.js, Python, PHP — API yang stabil, aman, dan gampang dikembangin ke depannya.</p>
+          <h4>Backend</h4><p>Mengembangkan sistem backend dan API yang stabil, aman, dan siap mendukung kebutuhan produk dalam jangka panjang.</p>
         </div>
         <div class="service-card">
           <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
-          <h4>Database</h4><p>MySQL, MongoDB, PostgreSQL — data tertata rapi, query cepat, nggak bikin menunggu.</p>
+          <h4>Database</h4><p>Merancang struktur data dan proses pengelolaan database yang efisien agar performa tetap optimal dan mudah dikembangkan.</p>
         </div>
         <div class="service-card">
           <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          <h4>Cloud & DevOps</h4><p>AWS, Docker, Kubernetes — infrastruktur yang tahan banting dan bisa tumbuh seiring bisnis.</p>
+          <h4>Cloud & DevOps</h4><p>Mempersiapkan infrastruktur deployment yang andal, terukur, dan mendukung pertumbuhan aplikasi secara berkelanjutan.</p>
         </div>
         <div class="service-card">
           <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-          <h4>Mobile</h4><p>React Native, Flutter — satu codebase, jalan mulus di Android maupun iOS.</p>
+          <h4>Mobile</h4><p>Mengembangkan aplikasi mobile lintas platform dengan pengalaman pengguna yang konsisten dan performa yang tetap terjaga.</p>
         </div>
         <div class="service-card">
           <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9.5 2A2.5 2.5 0 0112 4.5v15a2.5 2.5 0 01-2.5-2.5V2z"/><path d="M14.5 22A2.5 2.5 0 0112 19.5V4a2.5 2.5 0 012.5 2.5V22z"/><path d="M20 17.5A2.5 2.5 0 0117.5 20H4a2 2 0 01-2-2v-1.5"/></svg></div>
-          <h4>AI Integrasi</h4><p>TensorFlow, NLP — kecerdasan buatan yang nggak cuma keren di demo, tapi berguna di produksi.</p>
+          <h4>Integrasi AI</h4><p>Mengintegrasikan fitur berbasis AI ke dalam produk agar lebih adaptif, efisien, dan relevan dengan kebutuhan pengguna.</p>
         </div>
       </div>
     </div>
@@ -1044,7 +1054,7 @@ section{padding:96px 0}
         <div class="proj-body">
           <div class="proj-meta"><span class="label">Lead Developer</span><span class="proj-year">2022</span></div>
           <h3>E-Commerce Platform</h3>
-          <p>Platform e-commerce skala enterprise — manajemen produk, pembayaran multikanal, dan laporan otomatis yang langsung berguna.</p>
+          <p>Platform e-commerce yang dirancang untuk mendukung pengelolaan produk, transaksi multikanal, dan pelaporan operasional secara lebih efisien.</p>
           <div class="tag-row"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span></div>
           <a href="#" class="proj-link">Lihat Detail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -1054,7 +1064,7 @@ section{padding:96px 0}
         <div class="proj-body">
           <div class="proj-meta"><span class="label">Full-Stack Developer</span><span class="proj-year">2021</span></div>
           <h3>Analytics Dashboard</h3>
-          <p>Dashboard analitik real-time, grafik interaktif, dan laporan yang bisa dikustomisasi sesuai kebutuhan tim.</p>
+          <p>Dashboard analitik real-time dengan visualisasi data interaktif dan laporan yang dapat disesuaikan sesuai kebutuhan tim.</p>
           <div class="tag-row"><span class="tag">Vue.js</span><span class="tag">Laravel</span><span class="tag">MySQL</span></div>
           <a href="#" class="proj-link">Lihat Detail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -1064,7 +1074,7 @@ section{padding:96px 0}
         <div class="proj-body">
           <div class="proj-meta"><span class="label">Mobile Developer</span><span class="proj-year">2021</span></div>
           <h3>Health Tracker App</h3>
-          <p>App mobile buat pantau aktivitas harian, tidur, dan asupan gizi — lengkap dengan notifikasi personal yang nggak ganggu.</p>
+          <p>Aplikasi mobile untuk memantau aktivitas harian, kualitas tidur, dan pola kebugaran dengan pengalaman penggunaan yang sederhana dan informatif.</p>
           <div class="tag-row"><span class="tag">React Native</span><span class="tag">Firebase</span><span class="tag">Redux</span></div>
           <a href="#" class="proj-link">Lihat Detail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -1074,7 +1084,7 @@ section{padding:96px 0}
         <div class="proj-body">
           <div class="proj-meta"><span class="label">Backend Developer</span><span class="proj-year">2020</span></div>
           <h3>Learning Management System</h3>
-          <p>Platform belajar online dengan video kursus, ujian interaktif, dan forum diskusi yang bikin belajar nggak membosankan.</p>
+          <p>Platform pembelajaran online yang dilengkapi materi video, evaluasi interaktif, dan fitur diskusi untuk mendukung proses belajar yang lebih efektif.</p>
           <div class="tag-row"><span class="tag">Angular</span><span class="tag">Django</span><span class="tag">PostgreSQL</span></div>
           <a href="#" class="proj-link">Lihat Detail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -1084,7 +1094,7 @@ section{padding:96px 0}
         <div class="proj-body">
           <div class="proj-meta"><span class="label">Frontend Developer</span><span class="proj-year">2020</span></div>
           <h3>Real-time Chat App</h3>
-          <p>Chat dengan grup, berbagi file, dan video call — semua real-time, tanpa lag yang bikin frustrasi.</p>
+          <p>Aplikasi komunikasi real-time dengan fitur percakapan grup, berbagi file, dan panggilan video untuk mendukung kolaborasi digital.</p>
           <div class="tag-row"><span class="tag">React</span><span class="tag">WebSocket</span><span class="tag">Express</span></div>
           <a href="#" class="proj-link">Lihat Detail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -1094,7 +1104,7 @@ section{padding:96px 0}
         <div class="proj-body">
           <div class="proj-meta"><span class="label">ML Engineer</span><span class="proj-year">2019</span></div>
           <h3>AI Customer Service Bot</h3>
-          <p>Chatbot NLP yang handle ribuan pertanyaan sekaligus — akurat, cepat, dan aktif 24/7 tanpa perlu kopi.</p>
+          <p>Solusi chatbot berbasis NLP yang membantu menangani pertanyaan pelanggan secara cepat, konsisten, dan tersedia sepanjang waktu.</p>
           <div class="tag-row"><span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">Flask</span></div>
           <a href="#" class="proj-link">Lihat Detail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -1114,18 +1124,18 @@ section{padding:96px 0}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
           Pengalaman Kerja
         </div>
-        <div class="tl-item r"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Senior Full-Stack Developer</div><div class="tl-org">TechCorp Inc.</div><div class="tl-period">2021 — Sekarang</div><div class="tl-desc">Mimpin tim bangun platform e-commerce skala besar. Performa naik 40% setelah kami akhirnya berani refactor bagian caching yang sudah lama jadi utang teknis.</div></div></div>
-        <div class="tl-item r d1"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Frontend Developer</div><div class="tl-org">WebSolutions</div><div class="tl-period">2019 — 2021</div><div class="tl-desc">Fokus bikin UI yang ngebut dan enak dipakai di semua perangkat. Load time berhasil turun hampir 60% — tanpa mengorbankan satu fitur pun.</div></div></div>
-        <div class="tl-item r d2"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Backend Developer</div><div class="tl-org">DataTech Startup</div><div class="tl-period">2018 — 2019</div><div class="tl-desc">Bangun API dan microservices untuk platform analitik data, dilengkapi autentikasi berbasis token yang beneran aman — bukan aman-amanan.</div></div></div>
+        <div class="tl-item r"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Senior Full-Stack Developer</div><div class="tl-org">TechCorp Inc.</div><div class="tl-period">2021 — Sekarang</div><div class="tl-desc">Memimpin pengembangan platform e-commerce berskala besar, sekaligus meningkatkan performa sistem melalui optimalisasi arsitektur dan perbaikan pada area teknis yang sebelumnya menjadi bottleneck.</div></div></div>
+        <div class="tl-item r d1"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Frontend Developer</div><div class="tl-org">WebSolutions</div><div class="tl-period">2019 — 2021</div><div class="tl-desc">Berfokus pada pengembangan antarmuka yang cepat, responsif, dan mudah digunakan, dengan perhatian khusus pada performa dan konsistensi pengalaman pengguna di berbagai perangkat.</div></div></div>
+        <div class="tl-item r d2"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Backend Developer</div><div class="tl-org">DataTech Startup</div><div class="tl-period">2018 — 2019</div><div class="tl-desc">Mengembangkan API dan layanan backend untuk kebutuhan analitik data, termasuk implementasi autentikasi dan struktur layanan yang lebih aman serta mudah dikembangkan.</div></div></div>
       </div>
       <div>
         <div class="col-head r">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
           Pendidikan
         </div>
-        <div class="tl-item r"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Master in Computer Science</div><div class="tl-org">University of Technology</div><div class="tl-period">2016 — 2018</div><div class="tl-desc">Fokus di Machine Learning dan Distributed Systems. Tesis saya tentang optimasi pemrosesan data streaming di cloud — topik yang waktu itu masih cukup niche.</div></div></div>
-        <div class="tl-item r d1"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Bachelor in Software Engineering</div><div class="tl-org">Technical Institute</div><div class="tl-period">2012 — 2016</div><div class="tl-desc">Lulus Cum Laude. Aktif di klub programming dan sempat ikut beberapa hackathon nasional — menang juga kadang-kadang.</div></div></div>
-        <div class="tl-item r d2"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Sertifikasi Profesional</div><div class="tl-org">AWS · Google Cloud · CNCF</div><div class="tl-period">2017 — Sekarang</div><div class="tl-desc">AWS Solutions Architect, Google Cloud Professional Developer, dan Kubernetes Administrator (CKA). Sertifikasi yang beneran kepake, bukan sekadar hiasan CV.</div></div></div>
+        <div class="tl-item r"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Master in Computer Science</div><div class="tl-org">University of Technology</div><div class="tl-period">2016 — 2018</div><div class="tl-desc">Mendalami Machine Learning dan Distributed Systems, dengan fokus penelitian pada efisiensi pemrosesan data streaming di lingkungan cloud.</div></div></div>
+        <div class="tl-item r d1"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Bachelor in Software Engineering</div><div class="tl-org">Technical Institute</div><div class="tl-period">2012 — 2016</div><div class="tl-desc">Menyelesaikan studi dengan predikat Cum Laude serta aktif dalam kegiatan pengembangan kemampuan teknis melalui komunitas programming dan kompetisi teknologi.</div></div></div>
+        <div class="tl-item r d2"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Sertifikasi Profesional</div><div class="tl-org">AWS · Google Cloud · CNCF</div><div class="tl-period">2017 — Sekarang</div><div class="tl-desc">Memperoleh berbagai sertifikasi profesional yang relevan dengan cloud infrastructure, software development, dan container orchestration sebagai bentuk komitmen terhadap standar kerja yang terus berkembang.</div></div></div>
       </div>
     </div>
   </div>
@@ -1150,29 +1160,17 @@ section{padding:96px 0}
       <div class="r d2">
         <p class="skills-col-head">Tools & Teknologi</p>
         <div class="tools-grid">
-          <!-- React -->
           <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.05" fill="#61DAFB"/><ellipse cx="12" cy="12" rx="10" ry="3.8" stroke="#61DAFB" stroke-width="1.2" fill="none"/><ellipse cx="12" cy="12" rx="10" ry="3.8" stroke="#61DAFB" stroke-width="1.2" fill="none" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="3.8" stroke="#61DAFB" stroke-width="1.2" fill="none" transform="rotate(120 12 12)"/></svg></div><span>React</span></div>
-          <!-- Vue -->
           <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><polygon points="12,21.5 0.5,2.5 4.5,2.5 12,15.5 19.5,2.5 23.5,2.5" fill="#42b883"/><polygon points="12,14.5 6.5,5 9.2,5 12,10 14.8,5 17.5,5" fill="#35495e"/></svg></div><span>Vue</span></div>
-          <!-- TypeScript -->
           <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="3" fill="#3178C6"/><path d="M3 12h18M3 6h7v12" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div><span>TypeScript</span></div>
-          <!-- Node.js -->
           <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M12 1.5L2 7v10l10 5.5L22 17V7L12 1.5z" fill="#339933" stroke="none"/><path d="M12 1.5v21M2 7l10 5.5L22 7" stroke="#fff" stroke-width="1" fill="none" opacity=".35"/><text x="7" y="15" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">JS</text></svg></div><span>Node.js</span></div>
-          <!-- Python -->
           <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M11.5 2C8.5 2 7 3.5 7 5.5V8h5v1H5.5C3.5 9 2 10.7 2 13s1.5 4 3.5 4H7v-2c0-2 1.5-3.5 5-3.5s5 1.5 5 3.5v5c0 2-1.5 3-5 3S7 22 7 20" fill="none" stroke="#3776AB" stroke-width="1.6" stroke-linecap="round"/><path d="M12.5 22c3 0 4.5-1.5 4.5-3.5V16h-5v-1h5.5c2 0 3.5-1.7 3.5-4s-1.5-4-3.5-4H17v2c0 2-1.5 3.5-5 3.5" fill="none" stroke="#FFD43B" stroke-width="1.6" stroke-linecap="round"/><circle cx="9.8" cy="5.8" r="1" fill="#3776AB"/><circle cx="14.2" cy="18.2" r="1" fill="#FFD43B"/></svg></div><span>Python</span></div>
-          <!-- PHP -->
           <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="10" ry="6" fill="#7A86B8" opacity=".18" stroke="#7A86B8" stroke-width="1.2"/><text x="4.5" y="15.5" font-size="8" fill="#7A86B8" font-family="monospace" font-weight="bold">PHP</text></svg></div><span>PHP</span></div>
-          <!-- AWS -->
           <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M6.5 14.5c-1.5.8-2.5 0-2.5-1.5s1-3.5 3-4" stroke="#FF9900" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M17.5 14.5c1.5.8 2.5 0 2.5-1.5s-1-3.5-3-4" stroke="#FF9900" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M7 9.5C7 7 9 5 12 5s5 2 5 4.5c0 3-2 5.5-5 5.5S7 12.5 7 9.5z" stroke="#FF9900" stroke-width="1.5" fill="none"/><path d="M8.5 18.5h7M10 18.5v2M14 18.5v2" stroke="#FF9900" stroke-width="1.5" stroke-linecap="round"/></svg></div><span>AWS</span></div>
-          <!-- Docker -->
           <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><rect x="2" y="10" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="6.5" y="10" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="11" y="10" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="6.5" y="6" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="11" y="6" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="15.5" y="10" width="3" height="3" rx=".5" fill="#2496ED"/><path d="M2 14.5s.5 2 3 2h12c3 0 5-2 5-4 0 0-1-1-3-1h-1c0-2-2-3-4-2.5" stroke="#2496ED" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg></div><span>Docker</span></div>
-          <!-- Git -->
           <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M21.5 11.5l-9-9a1.4 1.4 0 00-2 0l-2 2 2.5 2.5a1.7 1.7 0 012.1 2.1l2.4 2.4a1.7 1.7 0 11-1 1l-2.2-2.2a1.7 1.7 0 01-2.3-2.3L7.5 5.5l-5 5a1.4 1.4 0 000 2l9 9a1.4 1.4 0 002 0l8-8a1.4 1.4 0 000-2z" fill="#F05032"/></svg></div><span>Git</span></div>
-          <!-- Figma -->
           <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="6" rx="2" fill="#F24E1E"/><rect x="8" y="9" width="8" height="6" rx="2" fill="#FF7262"/><rect x="8" y="16" width="4" height="6" rx="2" fill="#0ACF83"/><circle cx="16" cy="12" r="3" fill="#1ABCFE"/><rect x="8" y="2" width="4" height="6" rx="2" fill="#FF7262"/></svg></div><span>Figma</span></div>
-          <!-- MongoDB -->
           <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M12 2c-1.5 2.5-4 5.5-4 9.5a4 4 0 008 0C16 7.5 13.5 4.5 12 2z" fill="#00ED64"/><path d="M12 2c-1.5 2.5-4 5.5-4 9.5a4 4 0 008 0C16 7.5 13.5 4.5 12 2z" fill="none" stroke="#00684A" stroke-width=".8"/><line x1="12" y1="15.5" x2="12" y2="22" stroke="#00684A" stroke-width="1.8" stroke-linecap="round"/></svg></div><span>MongoDB</span></div>
-          <!-- PostgreSQL -->
           <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="4" fill="none" stroke="#336791" stroke-width="1.5"/><path d="M5 6v9c0 2.2 3.1 4 7 4s7-1.8 7-4V6" fill="none" stroke="#336791" stroke-width="1.5"/><path d="M5 11c0 2.2 3.1 4 7 4s7-1.8 7-4" fill="none" stroke="#336791" stroke-width="1.5"/><text x="8.5" y="9" font-size="5.5" fill="#336791" font-family="sans-serif" font-weight="bold">PG</text></svg></div><span>PostgreSQL</span></div>
         </div>
       </div>
@@ -1184,11 +1182,11 @@ section{padding:96px 0}
 <section id="testimonials">
   <div class="wrap">
     <p class="label r">Referensi</p>
-    <h2 class="section-title r d1" style="margin:10px 0 44px">Kata Mereka</h2>
+    <h2 class="section-title r d1" style="margin:10px 0 44px">Testimoni</h2>
     <div class="testi-grid">
-      <div class="testi-card r"><div class="testi-q">"</div><p class="testi-text">Jarang ketemu developer yang bisa lihat masalah dari sisi teknis sekaligus bisnis. Solusinya selalu pas dan bisa diandalkan jangka panjang.</p><div class="testi-author"><div class="testi-av">SJ</div><div><div class="testi-name">Sarah Johnson</div><div class="testi-role">CTO, TechCorp Inc.</div></div></div></div>
-      <div class="testi-card r d1"><div class="testi-q">"</div><p class="testi-text">Proyek selesai tepat waktu, performa melampaui target. Cara kerjanya terstruktur, komunikatif, dan nggak butuh banyak diawasi.</p><div class="testi-author"><div class="testi-av">DL</div><div><div class="testi-name">David Lee</div><div class="testi-role">Product Manager, InnovateTech</div></div></div></div>
-      <div class="testi-card r d2"><div class="testi-q">"</div><p class="testi-text">Kolaborasi yang beneran menyenangkan. Ngerti kode dan ngerti cara ngomong sama tim desain. Hasilnya produk yang rapi luar dan dalam.</p><div class="testi-author"><div class="testi-av">MW</div><div><div class="testi-name">Michelle Wong</div><div class="testi-role">UI/UX Designer, DesignHub</div></div></div></div>
+      <div class="testi-card r"><div class="testi-q">"</div><p class="testi-text">Eko memiliki keseimbangan yang baik antara pemahaman teknis dan cara berpikir strategis. Ia tidak hanya menyelesaikan masalah, tetapi juga membantu memastikan solusi yang dibangun tetap relevan untuk jangka panjang.</p><div class="testi-author"><div class="testi-av">SJ</div><div><div class="testi-name">Sarah Johnson</div><div class="testi-role">CTO, TechCorp Inc.</div></div></div></div>
+      <div class="testi-card r d1"><div class="testi-q">"</div><p class="testi-text">Proses kerja berjalan terstruktur, komunikatif, dan tepat waktu. Hasil akhirnya juga melampaui ekspektasi, terutama dari sisi performa dan kerapian implementasi.</p><div class="testi-author"><div class="testi-av">DL</div><div><div class="testi-name">David Lee</div><div class="testi-role">Product Manager, InnovateTech</div></div></div></div>
+      <div class="testi-card r d2"><div class="testi-q">"</div><p class="testi-text">Kolaborasi terasa sangat nyaman. Eko mampu menjembatani kebutuhan desain dan implementasi teknis dengan baik, sehingga hasil akhirnya rapi, konsisten, dan enak digunakan.</p><div class="testi-author"><div class="testi-av">MW</div><div><div class="testi-name">Michelle Wong</div><div class="testi-role">UI/UX Designer, DesignHub</div></div></div></div>
     </div>
     <div style="text-align:center;margin-top:30px">
       <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="btn btn-outline r">
@@ -1205,14 +1203,14 @@ section{padding:96px 0}
     <div class="section-header">
       <div>
         <p class="label r">Tulisan</p>
-        <h2 class="section-title r d1" style="margin-top:10px">Blog & Tutorial</h2>
+        <h2 class="section-title r d1" style="margin-top:10px">Artikel & Insight</h2>
       </div>
       <a href="#" class="btn btn-outline r">Semua Artikel →</a>
     </div>
     <div class="blog-grid">
-      <article class="blog-card r"><div class="blog-thumb g1"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div class="blog-body"><span class="blog-cat">React</span><h3><a href="#">React Hooks: Cara Saya Menyederhanakannya Setelah 3 Tahun</a></h3><p>Bukan tutorial dasar — ini pola yang saya pakai setiap hari di proyek nyata, plus kesalahan yang dulu sering saya buat tanpa sadar.</p><div class="blog-meta"><span class="blog-date">15 Mei 2023</span><a href="#" class="blog-link">Baca →</a></div></div></article>
-      <article class="blog-card r d1"><div class="blog-thumb g3"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="blog-body"><span class="blog-cat">Node.js</span><h3><a href="#">Microservices dengan Node.js: Pelajaran dari Proyek Nyata</a></h3><p>Panduan dari pengalaman langsung — bukan teori — soal bangun dan deploy arsitektur microservices ke lingkungan produksi.</p><div class="blog-meta"><span class="blog-date">3 April 2023</span><a href="#" class="blog-link">Baca →</a></div></div></article>
-      <article class="blog-card r d2"><div class="blog-thumb g2"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><div class="blog-body"><span class="blog-cat">Database</span><h3><a href="#">Optimasi Query MongoDB di Skala Jutaan Dokumen</a></h3><p>Teknik yang saya temukan waktu dataset terus membesar — beberapa hasilnya cukup mengejutkan waktu pertama kali dicoba.</p><div class="blog-meta"><span class="blog-date">20 Feb 2023</span><a href="#" class="blog-link">Baca →</a></div></div></article>
+      <article class="blog-card r"><div class="blog-thumb g1"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div class="blog-body"><span class="blog-cat">React</span><h3><a href="#">React Hooks: Pendekatan yang Lebih Sederhana untuk Proyek Nyata</a></h3><p>Pembahasan mengenai pola penggunaan React Hooks yang lebih sederhana, efektif, dan relevan berdasarkan pengalaman di proyek nyata.</p><div class="blog-meta"><span class="blog-date">15 Mei 2023</span><a href="#" class="blog-link">Baca →</a></div></div></article>
+      <article class="blog-card r d1"><div class="blog-thumb g3"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="blog-body"><span class="blog-cat">Node.js</span><h3><a href="#">Microservices dengan Node.js: Catatan dari Implementasi Nyata</a></h3><p>Catatan praktis dari pengalaman membangun dan menerapkan arsitektur microservices menggunakan Node.js di lingkungan produksi.</p><div class="blog-meta"><span class="blog-date">3 April 2023</span><a href="#" class="blog-link">Baca →</a></div></div></article>
+      <article class="blog-card r d2"><div class="blog-thumb g2"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><div class="blog-body"><span class="blog-cat">Database</span><h3><a href="#">Optimasi Query MongoDB untuk Dataset Berskala Besar</a></h3><p>Beberapa pendekatan optimasi query MongoDB untuk dataset besar, berdasarkan pengujian dan pengalaman implementasi langsung.</p><div class="blog-meta"><span class="blog-date">20 Feb 2023</span><a href="#" class="blog-link">Baca →</a></div></div></article>
     </div>
   </div>
 </section>
@@ -1223,11 +1221,11 @@ section{padding:96px 0}
     <div class="contact-grid">
       <div class="contact-info">
         <p class="label r">Kontak</p>
-        <h2 class="contact-heading r d1">Ada proyek yang mau didiskusiin?</h2>
-        <p class="r d2">Saya terbuka buat proyek baru, peluang kerja, atau sekadar ngobrol soal teknologi. Kirimin pesan — saya biasanya balas dalam sehari.</p>
+        <h2 class="contact-heading r d1">Mari diskusikan kebutuhan proyek Anda</h2>
+        <p class="r d2">Saya terbuka untuk kolaborasi proyek, peluang profesional, maupun diskusi seputar pengembangan produk digital. Silakan kirim pesan, dan saya akan merespons secepat mungkin pada jam kerja.</p>
         <div class="info-row r d2"><div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><span>email@example.com</span></div>
         <div class="info-row r d2"><div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><span>Jakarta, Indonesia</span></div>
-        <div class="info-row r d2"><div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span>Respons dalam 24 jam kerja</span></div>
+        <div class="info-row r d2"><div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span>Respon dalam 1 x 24 jam kerja</span></div>
         <div class="social-strip r d3">
           <a href="#" class="soc-btn" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></a>
           <a href="#" class="soc-btn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 014 0v4M11 10v7"/></svg></a>
@@ -1241,8 +1239,8 @@ section{padding:96px 0}
             <div class="field"><label for="fname">Nama</label><input type="text" id="fname" name="name" placeholder="Nama lengkap" required autocomplete="name"/></div>
             <div class="field"><label for="femail">Email</label><input type="email" id="femail" name="email" placeholder="email@example.com" required autocomplete="email"/></div>
           </div>
-          <div class="field"><label for="fsubject">Subjek</label><input type="text" id="fsubject" name="subject" placeholder="Topik yang mau dibahas" required/></div>
-          <div class="field"><label for="fmessage">Pesan</label><textarea id="fmessage" name="message" placeholder="Ceritain proyekmu atau apa yang kamu butuhin..." required></textarea></div>
+          <div class="field"><label for="fsubject">Subjek</label><input type="text" id="fsubject" name="subject" placeholder="Topik yang ingin dibahas" required/></div>
+          <div class="field"><label for="fmessage">Pesan</label><textarea id="fmessage" name="message" placeholder="Tuliskan kebutuhan proyek atau hal yang ingin Anda diskusikan..." required></textarea></div>
           <button type="submit" id="submitBtn" class="btn btn-primary" style="width:100%;justify-content:center;padding:13px 20px">
             Kirim Pesan
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -1258,11 +1256,11 @@ section{padding:96px 0}
   <footer class="site-footer">
     <div class="footer-left">
       <a href="#"><img src="https://cigore.github.io/portofolio/mylogo.png" alt="Eko" class="footer-logo-img" onerror="this.style.display='none'"/></a>
-      <span class="footer-copy">© <span id="footerYear"></span> Eko Maidiansyah. All rights reserved.</span>
+      <span class="footer-copy">© <span id="footerYear"></span> Eko Maidiansyah. Seluruh hak cipta dilindungi.</span>
     </div>
     <nav class="footer-nav">
       <a href="#about">Tentang</a><a href="#projects">Proyek</a>
-      <a href="#blog">Blog</a><a href="#contact">Kontak</a>
+      <a href="#blog">Artikel</a><a href="#contact">Kontak</a>
     </nav>
   </footer>
 </div>
@@ -1380,7 +1378,7 @@ $('#contactForm').addEventListener('submit', e => {
     btn.innerHTML = orig;
     btn.disabled = false;
     e.target.reset();
-    toast('Pesan terkirim! Saya akan balas dalam 24 jam 👋');
+    toast('Pesan berhasil terkirim. Saya akan merespons secepatnya.');
   }, 1400);
 });
 </script>
