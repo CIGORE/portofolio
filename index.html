@@ -11,22 +11,22 @@
 <link rel="icon" type="image/png" href="https://cigore.github.io/portofolio/mylogo.png"/>
 <style>
 /* ===================================================================
-   TOKENS – semua warna & ukuran di satu tempat
+   TOKENS
 =================================================================== */
 :root{
   --bg:        #F5F4F0;
   --surface:   #ECEAE4;
   --border:    #DDDAD2;
   --text:      #18170F;
-  --text-2:    #3D3C36;   /* teks sekunder terbaca */
-  --muted:     #6E6C65;   /* placeholder / label */
+  --text-2:    #3D3C36;
+  --muted:     #6E6C65;
   --accent:    #2352D8;
   --accent-h:  #1A3FAF;
   --accent-s:  rgba(35,82,216,.10);
   --green:     #16a34a;
   --radius:    12px;
   --nav-h:     64px;
-  --bnav-h:    58px;
+  --bnav-h:    62px;
   --ease:      cubic-bezier(.4,0,.2,1);
   --dur:       300ms;
 }
@@ -64,7 +64,7 @@ button{background:none;border:none;cursor:pointer;font-family:inherit}
 =================================================================== */
 .display{
   font-family:'DM Serif Display',serif;
-  font-size:clamp(2.5rem,6vw,5rem);
+  font-size:clamp(2.6rem,6vw,5rem);
   line-height:1.05;letter-spacing:-.025em;
   color:var(--text);
 }
@@ -94,7 +94,7 @@ section{padding:96px 0}
   height:var(--nav-h);
   background:var(--bg);
   border-bottom:1px solid var(--border);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease);
 }
 .nav-inner{
@@ -142,7 +142,7 @@ section{padding:96px 0}
 .toggle-icons svg{width:9px;height:9px;color:var(--muted)}
 
 /* ===================================================================
-   BOTTOM NAV — mobile only, full width edge-to-edge
+   BOTTOM NAV — mobile only
 =================================================================== */
 .bottom-nav{
   display:none;
@@ -153,16 +153,12 @@ section{padding:96px 0}
   transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease);
 }
 .bnav-inner{
-  display:flex;
-  align-items:stretch;
-  height:var(--bnav-h);
-  /* stretch full width — no max-width cap */
-  width:100%;
+  display:flex;align-items:stretch;
+  height:var(--bnav-h);width:100%;
 }
 .bn-item{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:3px;flex:1;
-  /* no side padding so items truly reach corners */
   padding:6px 0;
   color:var(--muted);
   position:relative;
@@ -170,29 +166,25 @@ section{padding:96px 0}
   transition:color .2s var(--ease);
   text-decoration:none;
 }
-.bn-item:first-child{padding-left:4px}
-.bn-item:last-child{padding-right:4px}
-
 .bn-icon{
-  width:22px;height:22px;
-  transition:transform .2s var(--ease);
+  width:24px;height:24px;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1);
   display:flex;align-items:center;justify-content:center;
 }
-.bn-icon svg{width:22px;height:22px}
+.bn-icon svg{width:22px;height:22px;stroke-width:1.8}
 .bn-label{
-  font-size:.57rem;font-weight:700;
+  font-size:.56rem;font-weight:700;
   letter-spacing:.04em;text-transform:uppercase;
   line-height:1;color:inherit;
 }
 .bn-item.active{color:var(--accent)}
-.bn-item.active .bn-icon{transform:translateY(-2px)}
-/* active pill indicator */
+.bn-item.active .bn-icon{transform:translateY(-3px) scale(1.08)}
 .bn-item.active::before{
   content:'';
   position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:28px;height:3px;
+  width:32px;height:3px;
   background:var(--accent);
-  border-radius:0 0 4px 4px;
+  border-radius:0 0 6px 6px;
 }
 
 /* ===================================================================
@@ -220,7 +212,12 @@ section{padding:96px 0}
   min-height:100svh;
   display:flex;flex-direction:column;justify-content:center;
 }
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:72px;
+  align-items:center;
+}
 
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
@@ -261,30 +258,184 @@ section{padding:96px 0}
 }
 .stat-label{font-size:.75rem;color:var(--muted);margin-top:4px}
 
-/* photo ring */
-.hero-photo-wrap{display:flex;justify-content:center;align-items:center}
-.photo-ring{
-  width:clamp(210px,25vw,330px);height:clamp(210px,25vw,330px);
-  border-radius:50%;border:1px solid var(--border);padding:8px;
-  position:relative;flex-shrink:0;
-  transition:border-color var(--dur) var(--ease);
+/* ============================================================
+   PHOTO FRAME — modern floating card design
+============================================================ */
+.hero-photo-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-shrink:0;
 }
-.photo-ring::before{
-  content:'';position:absolute;inset:-18px;border-radius:50%;
-  border:1px dashed var(--border);
-  animation:spin-slow 32s linear infinite;
-  transition:border-color var(--dur) var(--ease);
+
+.photo-frame-outer{
+  position:relative;
+  width:clamp(260px,28vw,370px);
 }
-@keyframes spin-slow{to{transform:rotate(360deg)}}
-.photo-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:top}
+
+/* Main card */
+.photo-card{
+  position:relative;
+  width:100%;
+  aspect-ratio:4/5;
+  border-radius:24px;
+  overflow:hidden;
+  border:1.5px solid var(--border);
+  background:var(--surface);
+  box-shadow:
+    0 4px 6px rgba(0,0,0,.04),
+    0 12px 28px rgba(0,0,0,.08),
+    0 32px 64px rgba(0,0,0,.06);
+  transition:
+    box-shadow .4s var(--ease),
+    transform .4s var(--ease),
+    border-color var(--dur) var(--ease);
+  z-index:2;
+}
+.dark .photo-card{
+  box-shadow:
+    0 4px 6px rgba(0,0,0,.2),
+    0 12px 28px rgba(0,0,0,.35),
+    0 32px 64px rgba(0,0,0,.3);
+}
+.photo-card:hover{
+  transform:translateY(-6px) rotate(-1deg);
+  box-shadow:
+    0 8px 12px rgba(0,0,0,.06),
+    0 20px 48px rgba(0,0,0,.12),
+    0 48px 96px rgba(0,0,0,.08);
+}
+.dark .photo-card:hover{
+  box-shadow:
+    0 8px 12px rgba(0,0,0,.3),
+    0 20px 48px rgba(0,0,0,.5),
+    0 48px 96px rgba(0,0,0,.4);
+}
+
+.photo-card img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
+}
 .photo-placeholder{
-  width:100%;height:100%;border-radius:50%;
+  width:100%;height:100%;
   background:var(--surface);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:10px;color:var(--muted);
-  transition:background var(--dur) var(--ease);
 }
-.photo-placeholder svg{width:48px;height:48px;opacity:.28}
+.photo-placeholder svg{width:52px;height:52px;opacity:.25}
+
+/* Subtle gradient overlay at bottom */
+.photo-card::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:45%;
+  background:linear-gradient(to top, rgba(0,0,0,.22) 0%, transparent 100%);
+  pointer-events:none;
+}
+
+/* Name badge on photo */
+.photo-name-tag{
+  position:absolute;
+  bottom:16px;left:16px;right:16px;
+  z-index:3;
+  background:rgba(255,255,255,.16);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:12px;
+  padding:10px 14px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.dark .photo-name-tag{
+  background:rgba(0,0,0,.3);
+  border-color:rgba(255,255,255,.1);
+}
+.pnt-left{}
+.pnt-name{
+  font-size:.82rem;font-weight:700;
+  color:#fff;line-height:1.2;
+}
+.pnt-role{font-size:.65rem;color:rgba(255,255,255,.75);margin-top:2px}
+.pnt-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 0 3px rgba(22,163,74,.3);
+  animation:pulse-dot 2.4s ease infinite;
+  flex-shrink:0;
+}
+
+/* Decorative back card */
+.photo-bg-card{
+  position:absolute;
+  top:14px;left:-14px;
+  width:100%;height:100%;
+  border-radius:24px;
+  border:1.5px solid var(--border);
+  background:var(--surface);
+  z-index:1;
+  transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease);
+}
+/* Second back card */
+.photo-bg-card2{
+  position:absolute;
+  top:26px;left:-26px;
+  width:100%;height:100%;
+  border-radius:24px;
+  border:1.5px solid var(--border);
+  background:var(--bg);
+  z-index:0;
+  opacity:.6;
+  transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease);
+}
+
+/* Floating badge: experience */
+.photo-badge-exp{
+  position:absolute;
+  top:-16px;right:-20px;
+  z-index:4;
+  background:var(--accent);
+  border-radius:14px;
+  padding:10px 14px;
+  display:flex;flex-direction:column;align-items:center;
+  box-shadow:0 8px 24px rgba(35,82,216,.35);
+}
+.pbe-num{
+  font-family:'DM Serif Display',serif;
+  font-size:1.4rem;line-height:1;color:#fff;
+}
+.pbe-label{font-size:.58rem;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+
+/* Floating badge: stack pill */
+.photo-badge-stack{
+  position:absolute;
+  bottom:-14px;right:-16px;
+  z-index:4;
+  background:var(--bg);
+  border:1.5px solid var(--border);
+  border-radius:100px;
+  padding:7px 13px 7px 9px;
+  display:flex;align-items:center;gap:6px;
+  box-shadow:0 6px 20px rgba(0,0,0,.1);
+  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease);
+}
+.dark .photo-badge-stack{box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.stack-dots{display:flex;gap:-4px}
+.stack-dot{
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid var(--bg);
+  margin-left:-6px;
+  font-size:.55rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;
+  transition:border-color var(--dur) var(--ease);
+}
+.stack-dot:first-child{margin-left:0}
+.sd1{background:#61DAFB}
+.sd2{background:#339933}
+.sd3{background:#3178C6}
+.stack-label{font-size:.68rem;font-weight:600;color:var(--text-2);white-space:nowrap}
 
 /* ===================================================================
    ABOUT
@@ -418,7 +569,6 @@ section{padding:96px 0}
 .track{height:3px;background:var(--border);border-radius:100px;overflow:hidden;transition:background var(--dur) var(--ease)}
 .bar{height:100%;background:var(--accent);border-radius:100px;width:0;transition:width 1.1s cubic-bezier(.4,0,.2,1) .1s}
 
-/* tools grid — real brand logos */
 .tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .tool{
   background:var(--bg);border:1.5px solid var(--border);border-radius:10px;
@@ -592,9 +742,11 @@ section{padding:96px 0}
 =================================================================== */
 @media(max-width:960px){
   .nav-links{display:none}
-  .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .hero-grid{grid-template-columns:1fr;gap:48px;justify-items:center}
+  .hero-grid > div:first-child{width:100%}
   .hero-photo-wrap{order:-1}
-  .photo-ring{width:180px;height:180px}
+  .photo-frame-outer{width:clamp(220px,55vw,320px)}
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
   .project-grid{grid-template-columns:1fr 1fr}
   .exp-grid{grid-template-columns:1fr;gap:40px}
   .skills-layout{grid-template-columns:1fr;gap:36px}
@@ -613,10 +765,13 @@ section{padding:96px 0}
   .wrap{padding:0 16px}
 
   .hero{padding-top:calc(var(--nav-h) + 28px);padding-bottom:36px;min-height:auto}
-  .hero-grid{gap:24px}
+  .hero-grid{gap:28px}
   .hero-photo-wrap{order:-1}
-  .photo-ring{width:140px;height:140px}
-  .photo-ring::before{inset:-12px}
+  .photo-frame-outer{width:clamp(200px,72vw,280px)}
+  .photo-badge-exp{top:-10px;right:-10px;padding:8px 12px}
+  .pbe-num{font-size:1.2rem}
+  .photo-badge-stack{bottom:-10px;right:-8px;padding:6px 10px 6px 7px}
+  .stack-dot{width:18px;height:18px}
   .hero-badge{font-size:.68rem;margin-bottom:16px}
   .display{font-size:clamp(2rem,9vw,2.9rem)}
   .hero-desc{font-size:.93rem;max-width:100%;margin-bottom:22px}
@@ -649,10 +804,10 @@ section{padding:96px 0}
 }
 
 @media(prefers-reduced-motion:reduce){
-  .photo-ring::before{animation:none}
-  .badge-dot{animation:none}
+  .badge-dot,.pnt-dot{animation:none}
   .r{transition:none;opacity:1;transform:none}
   .bar{transition:none}
+  .photo-card{transition:box-shadow .4s var(--ease)}
 }
 </style>
 </head>
@@ -683,52 +838,61 @@ section{padding:96px 0}
   </div>
 </nav>
 
-<!-- MOBILE BOTTOM NAV — full width, edge to edge -->
+<!-- MOBILE BOTTOM NAV — modern icons -->
 <nav class="bottom-nav" id="bottomNav" role="navigation" aria-label="Navigasi bawah">
   <div class="bnav-inner">
 
+    <!-- Home: house with chimney, modern stroke -->
     <a href="#hero" class="bn-item active" data-section="hero" aria-label="Home">
       <div class="bn-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 12L12 4l9 8"/><path d="M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 10.5V19a1 1 0 001 1h4.5v-4.5h5V20H19a1 1 0 001-1v-8.5"/>
+          <path d="M2 12L12 3l10 9"/>
         </svg>
       </div>
       <span class="bn-label">Home</span>
     </a>
 
+    <!-- About: user with subtle circle -->
     <a href="#about" class="bn-item" data-section="about" aria-label="Tentang">
       <div class="bn-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="7" r="4"/><path d="M5.5 20a6.5 6.5 0 0113 0"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="3.5"/>
+          <path d="M5 20c0-3.87 3.13-7 7-7s7 3.13 7 7"/>
         </svg>
       </div>
       <span class="bn-label">Tentang</span>
     </a>
 
+    <!-- Projects: grid/squares layout -->
     <a href="#projects" class="bn-item" data-section="projects" aria-label="Proyek">
       <div class="bn-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="7" width="20" height="15" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2M8 7V5a2 2 0 00-4 0v2"/>
-          <line x1="12" y1="12" x2="12" y2="17"/><line x1="9.5" y1="14.5" x2="14.5" y2="14.5"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/>
+          <rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/>
+          <rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/>
+          <rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/>
         </svg>
       </div>
       <span class="bn-label">Proyek</span>
     </a>
 
+    <!-- Skills: lightning bolt -->
     <a href="#skills" class="bn-item" data-section="skills" aria-label="Keahlian">
       <div class="bn-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2L4.5 13H12L11 22L19.5 11H12L13 2Z"/>
         </svg>
       </div>
       <span class="bn-label">Skill</span>
     </a>
 
+    <!-- Contact: paper plane send -->
     <a href="#contact" class="bn-item" data-section="contact" aria-label="Kontak">
       <div class="bn-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-          <polyline points="22,6 12,13 2,6"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 2L11 13"/>
+          <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
         </svg>
       </div>
       <span class="bn-label">Kontak</span>
@@ -750,7 +914,7 @@ section{padding:96px 0}
           Full-Stack<br><em>Developer</em><br>&amp; Vibe Coder.
         </h1>
         <p class="hero-desc r d2">
-          Hei, saya Eko — builder yang suka ngulik dari desain sampai deploy. Kalau ada ide, saya yang bikin jalannya: cepat, rapi, dan tetap enak dipakai orang beneran.
+          Hei, saya Eko — suka bangun hal-hal yang beneran berguna. Dari desain sampai deploy, saya yang jaga semuanya tetap jalan dengan mulus. Kalau kamu punya ide yang stuck di kepala, mari kita wujudkan bareng.
         </p>
         <div class="hero-actions r d3">
           <a href="#contact" class="btn btn-primary">
@@ -769,16 +933,48 @@ section{padding:96px 0}
           <div><div class="stat-num">15+</div><div class="stat-label">Klien Puas</div></div>
         </div>
       </div>
+
+      <!-- PHOTO FRAME — Modern floating card -->
       <div class="hero-photo-wrap r d2">
-        <div class="photo-ring">
-          <img src="https://cigore.github.io/portofolio/fotoku.png" alt="Eko Maidiansyah"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="photo-placeholder" style="display:none" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <span class="label">Eko Maidiansyah</span>
+        <div class="photo-frame-outer">
+          <!-- Back decorative cards -->
+          <div class="photo-bg-card2"></div>
+          <div class="photo-bg-card"></div>
+
+          <!-- Main photo card -->
+          <div class="photo-card">
+            <img src="https://cigore.github.io/portofolio/fotoku.png" alt="Eko Maidiansyah"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="photo-placeholder" style="display:none" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <!-- Name tag overlay -->
+            <div class="photo-name-tag">
+              <div class="pnt-left">
+                <div class="pnt-name">Eko Maidiansyah</div>
+                <div class="pnt-role">Full-Stack Developer</div>
+              </div>
+              <div class="pnt-dot"></div>
+            </div>
+          </div>
+
+          <!-- Floating badges -->
+          <div class="photo-badge-exp">
+            <div class="pbe-num">5+</div>
+            <div class="pbe-label">Years</div>
+          </div>
+
+          <div class="photo-badge-stack">
+            <div class="stack-dots">
+              <div class="stack-dot sd1" title="React">R</div>
+              <div class="stack-dot sd2" title="Node.js">N</div>
+              <div class="stack-dot sd3" title="TypeScript">T</div>
+            </div>
+            <span class="stack-label">Tech Stack</span>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -790,12 +986,12 @@ section{padding:96px 0}
       <div>
         <p class="label r">Tentang Saya</p>
         <h2 class="section-title r d1" style="margin:12px 0 20px">
-          Kode yang baik bukan sekadar jalan — ia harus
+          Kode yang baik bukan sekadar jalan —<br>ia harus
           <em style="font-family:'DM Serif Display',serif;color:var(--accent)">bertahan</em>.
         </h2>
-        <p class="about-text r d2">Saya <strong>Full-Stack Developer & Vibe Coder</strong> dengan 5+ tahun bikin produk digital dari nol. E-commerce enterprise, mobile app, dashboard data — semua sudah pernah saya sentuh.</p>
-        <p class="about-text r d2">Background di Computer Science plus pengalaman langsung di berbagai startup bikin saya tahu kapan harus ngebut, kapan harus napas, dan kapan harus bilang "ini butuh refactor dulu."</p>
-        <p class="about-text r d2">Di luar kerjaan, saya suka eksplor teknologi baru, sesekali kontribusi ke open-source, dan nulis buat berbagi hal-hal yang saya pelajari di lapangan.</p>
+        <p class="about-text r d2">Sudah lima tahun lebih saya ngulik dunia web, dari halaman landing sederhana sampai platform e-commerce yang dipakai ribuan orang. Yang paling saya suka? Momen ketika sesuatu yang tadinya cuma sketsa di kertas akhirnya bisa diklik dan dipakai beneran.</p>
+        <p class="about-text r d2">Latar belakang Computer Science bikin saya paham "kenapa"-nya, tapi pengalaman di berbagai startup yang ngajarin saya "bagaimana"-nya. Saya tahu kapan harus gerak cepat dan kapan harus duduk dulu, mikir, terus refactor dengan benar.</p>
+        <p class="about-text r d2">Kalau lagi nggak coding, biasanya saya lagi baca tentang teknologi baru, sesekali kontribusi ke open-source, atau nulis catatan dari hal-hal yang saya pelajari langsung di lapangan — biar nggak lupa, dan siapa tahu berguna buat orang lain.</p>
         <div class="chip-row r d3">
           <span class="chip">React</span><span class="chip">Node.js</span><span class="chip">Python</span>
           <span class="chip">TypeScript</span><span class="chip">Docker</span><span class="chip">AWS</span>
@@ -805,27 +1001,27 @@ section{padding:96px 0}
       <div class="service-grid r d2">
         <div class="service-card">
           <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-          <h4>Frontend</h4><p>React, Vue, Angular — antarmuka responsif dan cepat di semua perangkat.</p>
+          <h4>Frontend</h4><p>React, Vue, Angular — tampilan yang enak dilihat dan tetap ngebut di semua perangkat.</p>
         </div>
         <div class="service-card">
           <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
-          <h4>Backend</h4><p>Node.js, Python, PHP — API stabil, aman, dan mudah diperluas.</p>
+          <h4>Backend</h4><p>Node.js, Python, PHP — API yang stabil, aman, dan gampang dikembangin ke depannya.</p>
         </div>
         <div class="service-card">
           <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
-          <h4>Database</h4><p>MySQL, MongoDB, PostgreSQL — data terstruktur, query optimal.</p>
+          <h4>Database</h4><p>MySQL, MongoDB, PostgreSQL — data tertata rapi, query cepat, nggak bikin menunggu.</p>
         </div>
         <div class="service-card">
           <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          <h4>Cloud & DevOps</h4><p>AWS, Docker, Kubernetes — infrastruktur andal dan scalable.</p>
+          <h4>Cloud & DevOps</h4><p>AWS, Docker, Kubernetes — infrastruktur yang tahan banting dan bisa tumbuh seiring bisnis.</p>
         </div>
         <div class="service-card">
           <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-          <h4>Mobile</h4><p>React Native, Flutter — satu kode untuk Android dan iOS.</p>
+          <h4>Mobile</h4><p>React Native, Flutter — satu codebase, jalan mulus di Android maupun iOS.</p>
         </div>
         <div class="service-card">
           <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9.5 2A2.5 2.5 0 0112 4.5v15a2.5 2.5 0 01-2.5-2.5V2z"/><path d="M14.5 22A2.5 2.5 0 0112 19.5V4a2.5 2.5 0 012.5 2.5V22z"/><path d="M20 17.5A2.5 2.5 0 0117.5 20H4a2 2 0 01-2-2v-1.5"/></svg></div>
-          <h4>AI Integrasi</h4><p>TensorFlow, NLP — kecerdasan yang langsung bisa dipakai.</p>
+          <h4>AI Integrasi</h4><p>TensorFlow, NLP — kecerdasan buatan yang nggak cuma keren di demo, tapi berguna di produksi.</p>
         </div>
       </div>
     </div>
@@ -848,7 +1044,7 @@ section{padding:96px 0}
         <div class="proj-body">
           <div class="proj-meta"><span class="label">Lead Developer</span><span class="proj-year">2022</span></div>
           <h3>E-Commerce Platform</h3>
-          <p>Sistem e-commerce enterprise dengan manajemen produk, pembayaran multikanal, dan laporan otomatis.</p>
+          <p>Platform e-commerce skala enterprise — manajemen produk, pembayaran multikanal, dan laporan otomatis yang langsung berguna.</p>
           <div class="tag-row"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span></div>
           <a href="#" class="proj-link">Lihat Detail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -858,7 +1054,7 @@ section{padding:96px 0}
         <div class="proj-body">
           <div class="proj-meta"><span class="label">Full-Stack Developer</span><span class="proj-year">2021</span></div>
           <h3>Analytics Dashboard</h3>
-          <p>Dashboard analitik real-time dengan grafik interaktif dan laporan yang bisa dikustomisasi.</p>
+          <p>Dashboard analitik real-time, grafik interaktif, dan laporan yang bisa dikustomisasi sesuai kebutuhan tim.</p>
           <div class="tag-row"><span class="tag">Vue.js</span><span class="tag">Laravel</span><span class="tag">MySQL</span></div>
           <a href="#" class="proj-link">Lihat Detail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -868,7 +1064,7 @@ section{padding:96px 0}
         <div class="proj-body">
           <div class="proj-meta"><span class="label">Mobile Developer</span><span class="proj-year">2021</span></div>
           <h3>Health Tracker App</h3>
-          <p>App mobile untuk pantau aktivitas harian, pola tidur, dan asupan gizi dengan notifikasi personal.</p>
+          <p>App mobile buat pantau aktivitas harian, tidur, dan asupan gizi — lengkap dengan notifikasi personal yang nggak ganggu.</p>
           <div class="tag-row"><span class="tag">React Native</span><span class="tag">Firebase</span><span class="tag">Redux</span></div>
           <a href="#" class="proj-link">Lihat Detail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -878,7 +1074,7 @@ section{padding:96px 0}
         <div class="proj-body">
           <div class="proj-meta"><span class="label">Backend Developer</span><span class="proj-year">2020</span></div>
           <h3>Learning Management System</h3>
-          <p>Platform belajar online dengan video kursus, ujian interaktif, dan forum diskusi.</p>
+          <p>Platform belajar online dengan video kursus, ujian interaktif, dan forum diskusi yang bikin belajar nggak membosankan.</p>
           <div class="tag-row"><span class="tag">Angular</span><span class="tag">Django</span><span class="tag">PostgreSQL</span></div>
           <a href="#" class="proj-link">Lihat Detail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -888,7 +1084,7 @@ section{padding:96px 0}
         <div class="proj-body">
           <div class="proj-meta"><span class="label">Frontend Developer</span><span class="proj-year">2020</span></div>
           <h3>Real-time Chat App</h3>
-          <p>Aplikasi chat dengan grup, berbagi file, dan video call — semuanya real-time tanpa lag.</p>
+          <p>Chat dengan grup, berbagi file, dan video call — semua real-time, tanpa lag yang bikin frustrasi.</p>
           <div class="tag-row"><span class="tag">React</span><span class="tag">WebSocket</span><span class="tag">Express</span></div>
           <a href="#" class="proj-link">Lihat Detail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -898,7 +1094,7 @@ section{padding:96px 0}
         <div class="proj-body">
           <div class="proj-meta"><span class="label">ML Engineer</span><span class="proj-year">2019</span></div>
           <h3>AI Customer Service Bot</h3>
-          <p>Chatbot NLP yang handle ribuan pertanyaan sekaligus — akurat, cepat, dan 24 jam aktif.</p>
+          <p>Chatbot NLP yang handle ribuan pertanyaan sekaligus — akurat, cepat, dan aktif 24/7 tanpa perlu kopi.</p>
           <div class="tag-row"><span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">Flask</span></div>
           <a href="#" class="proj-link">Lihat Detail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -918,18 +1114,18 @@ section{padding:96px 0}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
           Pengalaman Kerja
         </div>
-        <div class="tl-item r"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Senior Full-Stack Developer</div><div class="tl-org">TechCorp Inc.</div><div class="tl-period">2021 — Sekarang</div><div class="tl-desc">Mimpin tim bangun platform e-commerce skala besar. Performa naik 40% lewat optimasi caching dan database yang tepat sasaran.</div></div></div>
-        <div class="tl-item r d1"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Frontend Developer</div><div class="tl-org">WebSolutions</div><div class="tl-period">2019 — 2021</div><div class="tl-desc">Bikin UI yang ngebut dan enak dipakai di semua device. Load time turun hampir 60% tanpa korbanin fitur.</div></div></div>
-        <div class="tl-item r d2"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Backend Developer</div><div class="tl-org">DataTech Startup</div><div class="tl-period">2018 — 2019</div><div class="tl-desc">Rancang API dan microservices untuk platform analitik data, lengkap dengan auth berbasis token yang aman.</div></div></div>
+        <div class="tl-item r"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Senior Full-Stack Developer</div><div class="tl-org">TechCorp Inc.</div><div class="tl-period">2021 — Sekarang</div><div class="tl-desc">Mimpin tim bangun platform e-commerce skala besar. Performa naik 40% setelah kami akhirnya berani refactor bagian caching yang sudah lama jadi utang teknis.</div></div></div>
+        <div class="tl-item r d1"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Frontend Developer</div><div class="tl-org">WebSolutions</div><div class="tl-period">2019 — 2021</div><div class="tl-desc">Fokus bikin UI yang ngebut dan enak dipakai di semua perangkat. Load time berhasil turun hampir 60% — tanpa mengorbankan satu fitur pun.</div></div></div>
+        <div class="tl-item r d2"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Backend Developer</div><div class="tl-org">DataTech Startup</div><div class="tl-period">2018 — 2019</div><div class="tl-desc">Bangun API dan microservices untuk platform analitik data, dilengkapi autentikasi berbasis token yang beneran aman — bukan aman-amanan.</div></div></div>
       </div>
       <div>
         <div class="col-head r">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
           Pendidikan
         </div>
-        <div class="tl-item r"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Master in Computer Science</div><div class="tl-org">University of Technology</div><div class="tl-period">2016 — 2018</div><div class="tl-desc">Fokus di ML dan Distributed Systems. Tesis soal optimasi algoritma pemrosesan data streaming di cloud.</div></div></div>
-        <div class="tl-item r d1"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Bachelor in Software Engineering</div><div class="tl-org">Technical Institute</div><div class="tl-period">2012 — 2016</div><div class="tl-desc">Lulus Cum Laude. Aktif di klub programming dan ikut beberapa hackathon nasional.</div></div></div>
-        <div class="tl-item r d2"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Sertifikasi Profesional</div><div class="tl-org">AWS · Google Cloud · CNCF</div><div class="tl-period">2017 — Sekarang</div><div class="tl-desc">AWS Solutions Architect, Google Cloud Professional Developer, dan Kubernetes Administrator (CKA).</div></div></div>
+        <div class="tl-item r"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Master in Computer Science</div><div class="tl-org">University of Technology</div><div class="tl-period">2016 — 2018</div><div class="tl-desc">Fokus di Machine Learning dan Distributed Systems. Tesis saya tentang optimasi pemrosesan data streaming di cloud — topik yang waktu itu masih cukup niche.</div></div></div>
+        <div class="tl-item r d1"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Bachelor in Software Engineering</div><div class="tl-org">Technical Institute</div><div class="tl-period">2012 — 2016</div><div class="tl-desc">Lulus Cum Laude. Aktif di klub programming dan sempat ikut beberapa hackathon nasional — menang juga kadang-kadang.</div></div></div>
+        <div class="tl-item r d2"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div><div class="tl-role">Sertifikasi Profesional</div><div class="tl-org">AWS · Google Cloud · CNCF</div><div class="tl-period">2017 — Sekarang</div><div class="tl-desc">AWS Solutions Architect, Google Cloud Professional Developer, dan Kubernetes Administrator (CKA). Sertifikasi yang beneran kepake, bukan sekadar hiasan CV.</div></div></div>
       </div>
     </div>
   </div>
@@ -954,79 +1150,30 @@ section{padding:96px 0}
       <div class="r d2">
         <p class="skills-col-head">Tools & Teknologi</p>
         <div class="tools-grid">
-
           <!-- React -->
-          <div class="tool">
-            <div class="tool-logo"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.05" fill="#61DAFB"/><ellipse cx="12" cy="12" rx="10" ry="3.8" stroke="#61DAFB" stroke-width="1.2" fill="none"/><ellipse cx="12" cy="12" rx="10" ry="3.8" stroke="#61DAFB" stroke-width="1.2" fill="none" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="3.8" stroke="#61DAFB" stroke-width="1.2" fill="none" transform="rotate(120 12 12)"/></svg></div>
-            <span>React</span>
-          </div>
-
+          <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.05" fill="#61DAFB"/><ellipse cx="12" cy="12" rx="10" ry="3.8" stroke="#61DAFB" stroke-width="1.2" fill="none"/><ellipse cx="12" cy="12" rx="10" ry="3.8" stroke="#61DAFB" stroke-width="1.2" fill="none" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="3.8" stroke="#61DAFB" stroke-width="1.2" fill="none" transform="rotate(120 12 12)"/></svg></div><span>React</span></div>
           <!-- Vue -->
-          <div class="tool">
-            <div class="tool-logo"><svg viewBox="0 0 24 24"><polygon points="12,21.5 0.5,2.5 4.5,2.5 12,15.5 19.5,2.5 23.5,2.5" fill="#42b883"/><polygon points="12,14.5 6.5,5 9.2,5 12,10 14.8,5 17.5,5" fill="#35495e"/></svg></div>
-            <span>Vue</span>
-          </div>
-
+          <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><polygon points="12,21.5 0.5,2.5 4.5,2.5 12,15.5 19.5,2.5 23.5,2.5" fill="#42b883"/><polygon points="12,14.5 6.5,5 9.2,5 12,10 14.8,5 17.5,5" fill="#35495e"/></svg></div><span>Vue</span></div>
           <!-- TypeScript -->
-          <div class="tool">
-            <div class="tool-logo"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="3" fill="#3178C6"/><path d="M3 12h18M3 6h7v12" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div>
-            <span>TypeScript</span>
-          </div>
-
+          <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="3" fill="#3178C6"/><path d="M3 12h18M3 6h7v12" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div><span>TypeScript</span></div>
           <!-- Node.js -->
-          <div class="tool">
-            <div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M12 1.5L2 7v10l10 5.5L22 17V7L12 1.5z" fill="#339933" stroke="none"/><path d="M12 1.5v21M2 7l10 5.5L22 7" stroke="#fff" stroke-width="1" fill="none" opacity=".35"/><text x="7" y="15" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">JS</text></svg></div>
-            <span>Node.js</span>
-          </div>
-
+          <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M12 1.5L2 7v10l10 5.5L22 17V7L12 1.5z" fill="#339933" stroke="none"/><path d="M12 1.5v21M2 7l10 5.5L22 7" stroke="#fff" stroke-width="1" fill="none" opacity=".35"/><text x="7" y="15" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">JS</text></svg></div><span>Node.js</span></div>
           <!-- Python -->
-          <div class="tool">
-            <div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M11.5 2C8.5 2 7 3.5 7 5.5V8h5v1H5.5C3.5 9 2 10.7 2 13s1.5 4 3.5 4H7v-2c0-2 1.5-3.5 5-3.5s5 1.5 5 3.5v5c0 2-1.5 3-5 3S7 22 7 20" fill="none" stroke="#3776AB" stroke-width="1.6" stroke-linecap="round"/><path d="M12.5 22c3 0 4.5-1.5 4.5-3.5V16h-5v-1h5.5c2 0 3.5-1.7 3.5-4s-1.5-4-3.5-4H17v2c0 2-1.5 3.5-5 3.5" fill="none" stroke="#FFD43B" stroke-width="1.6" stroke-linecap="round"/><circle cx="9.8" cy="5.8" r="1" fill="#3776AB"/><circle cx="14.2" cy="18.2" r="1" fill="#FFD43B"/></svg></div>
-            <span>Python</span>
-          </div>
-
+          <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M11.5 2C8.5 2 7 3.5 7 5.5V8h5v1H5.5C3.5 9 2 10.7 2 13s1.5 4 3.5 4H7v-2c0-2 1.5-3.5 5-3.5s5 1.5 5 3.5v5c0 2-1.5 3-5 3S7 22 7 20" fill="none" stroke="#3776AB" stroke-width="1.6" stroke-linecap="round"/><path d="M12.5 22c3 0 4.5-1.5 4.5-3.5V16h-5v-1h5.5c2 0 3.5-1.7 3.5-4s-1.5-4-3.5-4H17v2c0 2-1.5 3.5-5 3.5" fill="none" stroke="#FFD43B" stroke-width="1.6" stroke-linecap="round"/><circle cx="9.8" cy="5.8" r="1" fill="#3776AB"/><circle cx="14.2" cy="18.2" r="1" fill="#FFD43B"/></svg></div><span>Python</span></div>
           <!-- PHP -->
-          <div class="tool">
-            <div class="tool-logo"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="10" ry="6" fill="#7A86B8" opacity=".18" stroke="#7A86B8" stroke-width="1.2"/><text x="4.5" y="15.5" font-size="8" fill="#7A86B8" font-family="monospace" font-weight="bold">PHP</text></svg></div>
-            <span>PHP</span>
-          </div>
-
+          <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="10" ry="6" fill="#7A86B8" opacity=".18" stroke="#7A86B8" stroke-width="1.2"/><text x="4.5" y="15.5" font-size="8" fill="#7A86B8" font-family="monospace" font-weight="bold">PHP</text></svg></div><span>PHP</span></div>
           <!-- AWS -->
-          <div class="tool">
-            <div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M6.5 14.5c-1.5.8-2.5 0-2.5-1.5s1-3.5 3-4" stroke="#FF9900" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M17.5 14.5c1.5.8 2.5 0 2.5-1.5s-1-3.5-3-4" stroke="#FF9900" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M7 9.5C7 7 9 5 12 5s5 2 5 4.5c0 3-2 5.5-5 5.5S7 12.5 7 9.5z" stroke="#FF9900" stroke-width="1.5" fill="none"/><path d="M8.5 18.5h7M10 18.5v2M14 18.5v2" stroke="#FF9900" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-            <span>AWS</span>
-          </div>
-
+          <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M6.5 14.5c-1.5.8-2.5 0-2.5-1.5s1-3.5 3-4" stroke="#FF9900" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M17.5 14.5c1.5.8 2.5 0 2.5-1.5s-1-3.5-3-4" stroke="#FF9900" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M7 9.5C7 7 9 5 12 5s5 2 5 4.5c0 3-2 5.5-5 5.5S7 12.5 7 9.5z" stroke="#FF9900" stroke-width="1.5" fill="none"/><path d="M8.5 18.5h7M10 18.5v2M14 18.5v2" stroke="#FF9900" stroke-width="1.5" stroke-linecap="round"/></svg></div><span>AWS</span></div>
           <!-- Docker -->
-          <div class="tool">
-            <div class="tool-logo"><svg viewBox="0 0 24 24"><rect x="2" y="10" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="6.5" y="10" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="11" y="10" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="6.5" y="6" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="11" y="6" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="15.5" y="10" width="3" height="3" rx=".5" fill="#2496ED"/><path d="M2 14.5s.5 2 3 2h12c3 0 5-2 5-4 0 0-1-1-3-1h-1c0-2-2-3-4-2.5" stroke="#2496ED" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg></div>
-            <span>Docker</span>
-          </div>
-
+          <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><rect x="2" y="10" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="6.5" y="10" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="11" y="10" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="6.5" y="6" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="11" y="6" width="3" height="3" rx=".5" fill="#2496ED"/><rect x="15.5" y="10" width="3" height="3" rx=".5" fill="#2496ED"/><path d="M2 14.5s.5 2 3 2h12c3 0 5-2 5-4 0 0-1-1-3-1h-1c0-2-2-3-4-2.5" stroke="#2496ED" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg></div><span>Docker</span></div>
           <!-- Git -->
-          <div class="tool">
-            <div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M21.5 11.5l-9-9a1.4 1.4 0 00-2 0l-2 2 2.5 2.5a1.7 1.7 0 012.1 2.1l2.4 2.4a1.7 1.7 0 11-1 1l-2.2-2.2a1.7 1.7 0 01-2.3-2.3L7.5 5.5l-5 5a1.4 1.4 0 000 2l9 9a1.4 1.4 0 002 0l8-8a1.4 1.4 0 000-2z" fill="#F05032"/></svg></div>
-            <span>Git</span>
-          </div>
-
+          <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M21.5 11.5l-9-9a1.4 1.4 0 00-2 0l-2 2 2.5 2.5a1.7 1.7 0 012.1 2.1l2.4 2.4a1.7 1.7 0 11-1 1l-2.2-2.2a1.7 1.7 0 01-2.3-2.3L7.5 5.5l-5 5a1.4 1.4 0 000 2l9 9a1.4 1.4 0 002 0l8-8a1.4 1.4 0 000-2z" fill="#F05032"/></svg></div><span>Git</span></div>
           <!-- Figma -->
-          <div class="tool">
-            <div class="tool-logo"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="6" rx="2" fill="#F24E1E"/><rect x="8" y="9" width="8" height="6" rx="2" fill="#FF7262"/><rect x="8" y="16" width="4" height="6" rx="2" fill="#0ACF83"/><circle cx="16" cy="12" r="3" fill="#1ABCFE"/><rect x="8" y="2" width="4" height="6" rx="2" fill="#FF7262"/></svg></div>
-            <span>Figma</span>
-          </div>
-
+          <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="6" rx="2" fill="#F24E1E"/><rect x="8" y="9" width="8" height="6" rx="2" fill="#FF7262"/><rect x="8" y="16" width="4" height="6" rx="2" fill="#0ACF83"/><circle cx="16" cy="12" r="3" fill="#1ABCFE"/><rect x="8" y="2" width="4" height="6" rx="2" fill="#FF7262"/></svg></div><span>Figma</span></div>
           <!-- MongoDB -->
-          <div class="tool">
-            <div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M12 2c-1.5 2.5-4 5.5-4 9.5a4 4 0 008 0C16 7.5 13.5 4.5 12 2z" fill="#00ED64"/><path d="M12 2c-1.5 2.5-4 5.5-4 9.5a4 4 0 008 0C16 7.5 13.5 4.5 12 2z" fill="none" stroke="#00684A" stroke-width=".8"/><line x1="12" y1="15.5" x2="12" y2="22" stroke="#00684A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-            <span>MongoDB</span>
-          </div>
-
+          <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><path d="M12 2c-1.5 2.5-4 5.5-4 9.5a4 4 0 008 0C16 7.5 13.5 4.5 12 2z" fill="#00ED64"/><path d="M12 2c-1.5 2.5-4 5.5-4 9.5a4 4 0 008 0C16 7.5 13.5 4.5 12 2z" fill="none" stroke="#00684A" stroke-width=".8"/><line x1="12" y1="15.5" x2="12" y2="22" stroke="#00684A" stroke-width="1.8" stroke-linecap="round"/></svg></div><span>MongoDB</span></div>
           <!-- PostgreSQL -->
-          <div class="tool">
-            <div class="tool-logo"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="4" fill="none" stroke="#336791" stroke-width="1.5"/><path d="M5 6v9c0 2.2 3.1 4 7 4s7-1.8 7-4V6" fill="none" stroke="#336791" stroke-width="1.5"/><path d="M5 11c0 2.2 3.1 4 7 4s7-1.8 7-4" fill="none" stroke="#336791" stroke-width="1.5"/><text x="8.5" y="9" font-size="5.5" fill="#336791" font-family="sans-serif" font-weight="bold">PG</text></svg></div>
-            <span>PostgreSQL</span>
-          </div>
-
+          <div class="tool"><div class="tool-logo"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="4" fill="none" stroke="#336791" stroke-width="1.5"/><path d="M5 6v9c0 2.2 3.1 4 7 4s7-1.8 7-4V6" fill="none" stroke="#336791" stroke-width="1.5"/><path d="M5 11c0 2.2 3.1 4 7 4s7-1.8 7-4" fill="none" stroke="#336791" stroke-width="1.5"/><text x="8.5" y="9" font-size="5.5" fill="#336791" font-family="sans-serif" font-weight="bold">PG</text></svg></div><span>PostgreSQL</span></div>
         </div>
       </div>
     </div>
@@ -1063,9 +1210,9 @@ section{padding:96px 0}
       <a href="#" class="btn btn-outline r">Semua Artikel →</a>
     </div>
     <div class="blog-grid">
-      <article class="blog-card r"><div class="blog-thumb g1"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div class="blog-body"><span class="blog-cat">React</span><h3><a href="#">React Hooks: Cara Saya Menyederhanakannya Setelah 3 Tahun</a></h3><p>Bukan tutorial dasar — ini pola yang saya pakai setiap hari di proyek nyata, plus kesalahan yang dulu sering saya buat.</p><div class="blog-meta"><span class="blog-date">15 Mei 2023</span><a href="#" class="blog-link">Baca →</a></div></div></article>
-      <article class="blog-card r d1"><div class="blog-thumb g3"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="blog-body"><span class="blog-cat">Node.js</span><h3><a href="#">Microservices dengan Node.js: Pelajaran dari Proyek Nyata</a></h3><p>Panduan dari pengalaman langsung bangun dan deploy arsitektur microservices ke lingkungan produksi.</p><div class="blog-meta"><span class="blog-date">3 April 2023</span><a href="#" class="blog-link">Baca →</a></div></div></article>
-      <article class="blog-card r d2"><div class="blog-thumb g2"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><div class="blog-body"><span class="blog-cat">Database</span><h3><a href="#">Optimasi Query MongoDB di Skala Jutaan Dokumen</a></h3><p>Teknik yang saya temukan saat dataset terus membesar — beberapa hasilnya cukup mengejutkan waktu pertama dicoba.</p><div class="blog-meta"><span class="blog-date">20 Feb 2023</span><a href="#" class="blog-link">Baca →</a></div></div></article>
+      <article class="blog-card r"><div class="blog-thumb g1"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div class="blog-body"><span class="blog-cat">React</span><h3><a href="#">React Hooks: Cara Saya Menyederhanakannya Setelah 3 Tahun</a></h3><p>Bukan tutorial dasar — ini pola yang saya pakai setiap hari di proyek nyata, plus kesalahan yang dulu sering saya buat tanpa sadar.</p><div class="blog-meta"><span class="blog-date">15 Mei 2023</span><a href="#" class="blog-link">Baca →</a></div></div></article>
+      <article class="blog-card r d1"><div class="blog-thumb g3"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="blog-body"><span class="blog-cat">Node.js</span><h3><a href="#">Microservices dengan Node.js: Pelajaran dari Proyek Nyata</a></h3><p>Panduan dari pengalaman langsung — bukan teori — soal bangun dan deploy arsitektur microservices ke lingkungan produksi.</p><div class="blog-meta"><span class="blog-date">3 April 2023</span><a href="#" class="blog-link">Baca →</a></div></div></article>
+      <article class="blog-card r d2"><div class="blog-thumb g2"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><div class="blog-body"><span class="blog-cat">Database</span><h3><a href="#">Optimasi Query MongoDB di Skala Jutaan Dokumen</a></h3><p>Teknik yang saya temukan waktu dataset terus membesar — beberapa hasilnya cukup mengejutkan waktu pertama kali dicoba.</p><div class="blog-meta"><span class="blog-date">20 Feb 2023</span><a href="#" class="blog-link">Baca →</a></div></div></article>
     </div>
   </div>
 </section>
@@ -1077,7 +1224,7 @@ section{padding:96px 0}
       <div class="contact-info">
         <p class="label r">Kontak</p>
         <h2 class="contact-heading r d1">Ada proyek yang mau didiskusiin?</h2>
-        <p class="r d2">Saya terbuka buat proyek baru, peluang kerja, atau sekadar ngobrol soal teknologi. Kirimin pesan — saya biasanya balas cepat.</p>
+        <p class="r d2">Saya terbuka buat proyek baru, peluang kerja, atau sekadar ngobrol soal teknologi. Kirimin pesan — saya biasanya balas dalam sehari.</p>
         <div class="info-row r d2"><div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><span>email@example.com</span></div>
         <div class="info-row r d2"><div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><span>Jakarta, Indonesia</span></div>
         <div class="info-row r d2"><div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span>Respons dalam 24 jam kerja</span></div>
@@ -1134,75 +1281,107 @@ section{padding:96px 0}
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
+// Footer year
 $('#footerYear').textContent = new Date().getFullYear();
 
-/* Theme */
+// Theme
 const html = document.documentElement;
-function setTheme(dark){ html.classList.toggle('dark',dark); localStorage.setItem('theme',dark?'dark':'light'); }
-if(localStorage.getItem('theme')==='dark') setTheme(true);
-$('#themeToggle').addEventListener('click',()=>setTheme(!html.classList.contains('dark')));
+function setTheme(dark){
+  html.classList.toggle('dark', dark);
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+}
+// Init theme from storage or system preference
+const savedTheme = localStorage.getItem('theme');
+if(savedTheme === 'dark'){
+  setTheme(true);
+} else if(!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches){
+  setTheme(true);
+}
+$('#themeToggle').addEventListener('click', () => setTheme(!html.classList.contains('dark')));
 
-/* Bottom nav active state */
+// Bottom nav active state
 const SECTIONS = ['hero','about','projects','skills','contact'];
 const bnItems = $$('.bn-item[data-section]');
 function updateNav(){
-  const mid = window.scrollY + window.innerHeight*.35;
+  const mid = window.scrollY + window.innerHeight * 0.38;
   let cur = SECTIONS[0];
-  SECTIONS.forEach(id=>{ const el=document.getElementById(id); if(el&&el.offsetTop<=mid) cur=id; });
-  bnItems.forEach(item=>item.classList.toggle('active',item.dataset.section===cur));
+  SECTIONS.forEach(id => {
+    const el = document.getElementById(id);
+    if(el && el.offsetTop <= mid) cur = id;
+  });
+  bnItems.forEach(item => item.classList.toggle('active', item.dataset.section === cur));
 }
-window.addEventListener('scroll',updateNav,{passive:true});
+window.addEventListener('scroll', updateNav, {passive:true});
 updateNav();
 
-/* Smooth scroll for bottom nav */
-$$('.bn-item[href]').forEach(link=>{
-  link.addEventListener('click',e=>{
-    const href=link.getAttribute('href');
-    if(!href||!href.startsWith('#')) return;
+// Smooth scroll for all internal links including bottom nav
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const href = link.getAttribute('href');
+    if(!href || href === '#') return;
+    const id = href.replace('#','');
+    const target = document.getElementById(id);
+    if(!target) return;
     e.preventDefault();
-    const id=href.replace('#','');
-    const target=document.getElementById(id);
-    const top=target?Math.max(0,target.offsetTop-parseInt(getComputedStyle(html).getPropertyValue('--nav-h'))):0;
-    window.scrollTo({top,behavior:'smooth'});
+    const navH = parseInt(getComputedStyle(html).getPropertyValue('--nav-h')) || 64;
+    const top = Math.max(0, target.offsetTop - navH);
+    window.scrollTo({top, behavior:'smooth'});
   });
 });
 
-/* Back to top */
-const btt=$('#btt');
-window.addEventListener('scroll',()=>btt.classList.toggle('show',window.scrollY>360),{passive:true});
-btt.addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});
+// Back to top
+const btt = $('#btt');
+window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 360), {passive:true});
+btt.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
 
-/* Scroll reveal */
-const ro=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}});
-},{threshold:0.07});
-$$('.r').forEach(el=>ro.observe(el));
+// Scroll reveal
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+  });
+}, {threshold: 0.07});
+$$('.r').forEach(el => ro.observe(el));
 
-/* Skill bars */
-const bo=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.style.width=e.target.dataset.w+'%';bo.unobserve(e.target);}});
-},{threshold:0.3});
-$$('.bar').forEach(b=>bo.observe(b));
+// Skill bars
+const bo = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.style.width = e.target.dataset.w + '%'; bo.unobserve(e.target); }
+  });
+}, {threshold: 0.3});
+$$('.bar').forEach(b => bo.observe(b));
 
-/* Toast */
-function toast(msg,ms=3200){
-  $('#toastMsg').textContent=msg;
-  const t=$('#toast');t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),ms);
+// Toast
+function toast(msg, ms = 3200){
+  $('#toastMsg').textContent = msg;
+  const t = $('#toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), ms);
 }
 
-/* Contact form */
-$('#contactForm').addEventListener('submit',e=>{
+// Contact form
+$('#contactForm').addEventListener('submit', e => {
   e.preventDefault();
-  const email=$('#femail').value.trim();
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){toast('Masukkan alamat email yang valid.');return;}
-  const btn=$('#submitBtn'),orig=btn.innerHTML;
-  btn.innerHTML='Mengirim…';btn.disabled=true;
-  setTimeout(()=>{
-    btn.innerHTML=orig;btn.disabled=false;
+  const name = $('#fname').value.trim();
+  const email = $('#femail').value.trim();
+  const subject = $('#fsubject').value.trim();
+  const message = $('#fmessage').value.trim();
+
+  if(!name){ toast('Nama tidak boleh kosong.'); return; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ toast('Masukkan alamat email yang valid.'); return; }
+  if(!subject){ toast('Subjek tidak boleh kosong.'); return; }
+  if(!message){ toast('Pesan tidak boleh kosong.'); return; }
+
+  const btn = $('#submitBtn');
+  const orig = btn.innerHTML;
+  btn.innerHTML = 'Mengirim…';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    btn.innerHTML = orig;
+    btn.disabled = false;
     e.target.reset();
     toast('Pesan terkirim! Saya akan balas dalam 24 jam 👋');
-  },1400);
+  }, 1400);
 });
 </script>
 </body>
